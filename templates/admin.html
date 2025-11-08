@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<style>
+/* ---------- General Layout ---------- */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  background: url("../assets/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+/* ---------- Loader ---------- */
+#loader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: black;
+  color: #00bfff;
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeOut 2.5s ease forwards;
+  animation-delay: 2.5s;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* ---------- Header & Nav ---------- */
+header {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 0;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+
+header h1 {
+  margin: 5px 0;
+  color: #00bfff;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #ccc;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #00bfff;
+}
+
+/* ---------- Solar System Layout ---------- */
+.solar-system {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 50px 10px;
+}
+
+.orbit {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 30px;
+  animation: orbit 20s linear infinite;
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.planet {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  box-shadow: 0 0 20px #00bfff;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.planet:hover {
+  transform: scale(1.2);
+}
+
+/* ---------- Info Card ---------- */
+.info-card {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.8);
+  padding: 10px;
+  border-radius: 8px;
+  width: 200px;
+  text-align: left;
+  font-size: 0.9em;
+}
+
+.planet:hover .info-card {
+  display: block;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  border-top: 1px solid #333;
+}
+
+footer button {
+  background: #00bfff;
+  color: black;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+footer button:hover {
+  background: white;
+}
+
+/* ---------- Login & Admin ---------- */
+.login-body {
+  background: radial-gradient(circle at center, #001122, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-form {
+  background: rgba(0,0,0,0.8);
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.login-form input {
+  display: block;
+  width: 200px;
+  margin: 10px auto;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+}
+
+.login-form button {
+  background: #00bfff;
+  color: black;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ---------- Admin Section ---------- */
+.admin-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.admin-form input, .admin-form textarea {
+  width: 250px;
+  margin: 5px;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+.admin-form button {
+  background: #00bfff;
+  color: black;
+  padding: 8px 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.planet-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.planet-card {
+  background: rgba(0,0,0,0.7);
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  width: 180px;
+}
+
+.planet-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.delete-btn {
+  display: inline-block;
+  background: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.delete-btn:hover {
+  background: darkred;
+}
+
+/* ---------- Compare Table ---------- */
+.compare-section table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: rgba(0,0,0,0.7);
+}
+
+.compare-section th, .compare-section td {
+  border: 1px solid #333;
+  padding: 10px;
+}
+
+.compare-section th {
+  background: #00bfff;
+  color: black;
+}
+
+</style>
+</head>
+<body>
+  <header>
+    <h1>🛰 Admin Panel</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <section class="admin-section">
+    <h2>Add New Planet</h2>
+    <form method="POST" enctype="multipart/form-data" class="admin-form">
+      <input type="text" name="name" placeholder="Planet Name" required>
+      <input type="text" name="size" placeholder="Size" required>
+      <input type="text" name="distance" placeholder="Distance from Sun" required>
+      <textarea name="fact" placeholder="Interesting Fact" required></textarea>
+      <input type="file" name="image">
+      <button type="submit">Add Planet</button>
+    </form>
+
+    <h2>Existing Planets</h2>
+    <div class="planet-list">
+      {% for p in planets %}
+      <div class="planet-card">
+        <img src="{{ p.image }}" alt="{{ p.name }}">
+        <h3>{{ p.name }}</h3>
+        <p>{{ p.fact }}</p>
+        <a href="/delete/{{ p.name }}" class="delete-btn">Delete</a>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</body>
+</html>
