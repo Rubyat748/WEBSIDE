@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Mercury",
+    "size": "4,879 km",
+    "distance": "57.9 million km",
+    "description": "The smallest and fastest planet, closest to the Sun.",
+    "image": "mercury.jpg"
+  },
+  {
+    "name": "Venus",
+    "size": "12,104 km",
+    "distance": "108.2 million km",
+    "description": "Venus has a thick toxic atmosphere and the hottest surface.",
+    "image": "venus.jpg"
+  },
+  {
+    "name": "Earth",
+    "size": "12,742 km",
+    "distance": "149.6 million km",
+    "description": "Our home planet, the only one known to support life.",
+    "image": "earth.jpg"
+  },
+  {
+    "name": "Mars",
+    "size": "6,779 km",
+    "distance": "227.9 million km",
+    "description": "Known as the Red Planet, home to Olympus Mons — the tallest volcano.",
+    "image": "mars.jpg"
+  },
+  {
+    "name": "Jupiter",
+    "size": "139,820 km",
+    "distance": "778.5 million km",
+    "description": "The gas giant, largest planet in our Solar System.",
+    "image": "jupiter.jpg"
+  },
+  {
+    "name": "Saturn",
+    "size": "116,460 km",
+    "distance": "1.4 billion km",
+    "description": "Famous for its beautiful ring system made of ice and dust.",
+    "image": "saturn.jpg"
+  },
+  {
+    "name": "Uranus",
+    "size": "50,724 km",
+    "distance": "2.9 billion km",
+    "description": "An ice giant that rotates on its side, with a blue-green color.",
+    "image": "uranus.jpg"
+  },
+  {
+    "name": "Neptune",
+    "size": "49,244 km",
+    "distance": "4.5 billion km",
+    "description": "The farthest known planet, deep blue and extremely windy.",
+    "image": "neptune.jpg"
+  }
+]

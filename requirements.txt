@@ -1,0 +1,9 @@
+# 🌌 Solar System Web App (Flask)
+
+A simple interactive solar system simulation with rotating planets, sound effects, and admin control panel.
+
+## 🛠️ How to Run Locally
+
+1. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
